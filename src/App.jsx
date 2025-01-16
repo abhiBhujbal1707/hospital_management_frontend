@@ -1,13 +1,13 @@
 import { useState } from 'react'
-
-import Navbar from './components/Navbar'
+import MainHero from './components/Hero/MainHero'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
   <>
-    <Navbar />
+   <MainHero />
+    
   </>
   )
 }
