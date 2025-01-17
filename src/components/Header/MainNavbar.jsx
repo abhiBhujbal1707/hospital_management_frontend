@@ -20,7 +20,7 @@ const MainNavbar = () => {
    
 
     return (
-        <nav className="bg-zinc-500 border-gray-200 dark:bg-gray-900 z-10">
+        <nav className="bg-zinc-500 border-gray-200 z-10">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="/logo.png" className="h-8" alt="Logo" />
@@ -29,7 +29,7 @@ const MainNavbar = () => {
 
                 <button
                     onClick={toggleMenu}
-                    className="inline-flex items-center p-2 text-sm text-white rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+                    className="inline-flex items-center p-2 text-sm text-white rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400"
                     aria-controls="navbar-default"
                     aria-expanded={isMenuOpen}
                 >
@@ -52,7 +52,7 @@ const MainNavbar = () => {
                     className={`w-full md:block md:w-auto ${isMenuOpen ? 'block' : 'hidden'}`}
                     id="navbar-default"
                 >
-                    <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gray-800 dark:border-gray-700">
+                    <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 ">
                         <li><a href="#" className="block py-2 px-3">Home</a></li>
                         <li><a href="#" className="block py-2 px-3">About</a></li>
                         <li><a href="#" className="block py-2 px-3">Doctors</a></li>
@@ -61,7 +61,7 @@ const MainNavbar = () => {
                         <li className="relative ">
                             <button onClick={toggleSignUp} className="block py-2 px-3 w-full text-left"><div className='flex items-center gap-1'>Sign Up<AiOutlineDown /></div></button>
                             {isSignUpOpen && (
-                                <ul className="absolute flex flex-col mt-2 bg-white border rounded shadow-lg dark:bg-gray-800">
+                                <ul className="absolute flex flex-col mt-2 bg-white border rounded shadow-lg">
                                     <li><a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Admin</a></li>
                                     <li><a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Doctor</a></li>
                                     <li><a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Patient</a></li>
