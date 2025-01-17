@@ -2,11 +2,11 @@ import { useState } from 'react'
 import MainHero from './components/Hero/MainHero'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
+  const [user, setUser] = useState('Patient')
   return (
   <>
-   <MainHero />
+  <MainHero user={user} setUser={setUser} />
     
   </>
   )
