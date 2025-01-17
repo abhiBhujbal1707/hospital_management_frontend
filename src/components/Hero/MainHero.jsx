@@ -38,7 +38,7 @@ const MainHero = ({ user, setUser }) => {
                   </div>
                 </div>
 
-                <div>
+                <div className="bg-white blur-xs my-4  rounded-lg  w-full max-w-md">
                   <Signup userType={user} />
                 </div>
               </div>

@@ -8,6 +8,7 @@ createRoot(document.getElementById('root')).render(
     
  <>
  {/* <App></App> */}
- <DoctorDashboard></DoctorDashboard>
+ {/* <DoctorDashboard></DoctorDashboard> */}
+
  </>
 )
