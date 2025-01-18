@@ -16,7 +16,7 @@ const MainNavbar = ({user,setUser}) => {
     };
 
     return (
-        <nav className="bg-zinc-500 border-gray-200 dark:bg-gray-900 z-10">
+        <nav className="bg-zinc-500  z-10">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="#" className="flex items-center space-x-3">
                     <img src="/logo.png" className="h-8" alt="Logo" />
