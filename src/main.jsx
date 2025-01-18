@@ -8,8 +8,8 @@ import HospitalManagement from './components/Staff/StaffDashboard.jsx'
 createRoot(document.getElementById('root')).render(
     
  <>
- {/* <App></App>
- <DoctorDashboard></DoctorDashboard> */}
- <HospitalManagement></HospitalManagement>
+ <App></App>
+ {/* <DoctorDashboard></DoctorDashboard> */}
+ {/* <HospitalManagement></HospitalManagement> */}
  </>
 )
