@@ -124,7 +124,7 @@ function App() {
                 Update Patient
               </Button>
             ) : (
-              <Button onClick={addPatient} className="mr-2">
+              <Button variant="secondary"onClick={addPatient} style={{ marginRight: '8px' }}>
                 Add Patient
               </Button>
             )}
@@ -218,7 +218,7 @@ function App() {
                 Update Appointment
               </Button>
             ) : (
-              <Button onClick={addAppointment} className="mr-2">
+              <Button onClick={addAppointment} style={{ marginRight: '8px' }} >
                 Schedule Appointment
               </Button>
             )}
