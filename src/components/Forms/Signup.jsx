@@ -4,9 +4,35 @@ import Passwordgenerator from '../Passwordgenerator';
 
 const Signup = ({ userType }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = (Data) => {
-        console.log(`${userType} Data:`, Data);
-    };
+    const onSubmit = async (data) => {
+        const apiEndpoint = 'http://localhost:5081/api/user'; // Backend API URL
+      
+        try {
+          const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+      
+          if (response.ok) {
+            const result = await response.json();
+            alert('User registered successfully with ID: ' + result.id);
+            console.log('Server response:', result);
+          } else {
+            const error = await response.text();
+            console.error('Error:', error);
+            alert('Failed to register user.');
+          }
+        } catch (err) {
+          console.error('Fetch error:', err);
+          alert('An error occurred. Check server connection.');
+        }
+      };
+      
+      
+      
 
     return (
         <div className=' my-4  rounded-lg  w-full max-w-md'>

@@ -81,7 +81,7 @@ const MainNavbar = ({user,setUser}) => {
                                 </ul>
                             )}
                         </li>
-                        <li><a href="#" className="block py-2 px-3">Login</a></li>
+                        <li><a href="#" className="block py-2 px-3" onClick={() => setUser('Login')}  >Login</a></li>
                     </ul>
                 </div>
             </div>
