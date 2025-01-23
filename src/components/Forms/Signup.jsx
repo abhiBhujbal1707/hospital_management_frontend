@@ -1,12 +1,24 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import Passwordgenerator from '../Passwordgenerator';
+import axios from 'axios';
 
 const Signup = ({ userType }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = (Data) => {
-        console.log(`${userType} Data:`, Data);
-    };
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:5102/api/user', data);
+            console.log(response.data);  // Success response from the server
+            // You can handle success (e.g., show a success message, redirect, etc.)
+        } catch (error) {
+            console.error('There was an error submitting the form!', error);
+            // Handle error (e.g., show an error message)
+        }
+    }
+    
+      
+      
+      
 
     return (
         <div className=' my-4  rounded-lg  w-full max-w-md'>
