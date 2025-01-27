@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import Passwordgenerator from '../Passwordgenerator';
+// import Passwordgenerator from '../Passwordgenerator';
 import axios from 'axios';
 
 const Signup = ({ userType }) => {
