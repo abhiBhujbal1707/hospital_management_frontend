@@ -74,9 +74,9 @@ const MainNavbar = ({user,setUser}) => {
                                     <li>
                                         <a href="#" className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 ${selectedOption === 'Staff' ? 'bg-gray-100 dark:bg-gray-600' : ''}`} onClick={() =>{
                                             setIsSignUpOpen(false)
-                                            setSelectedOption('Staff') 
-                                            setUser('Staff')     
-                                        } }>Staff</a>
+                                            setSelectedOption('Receptionist') 
+                                            setUser('Receptionist')     
+                                        } }>Receptionist</a>
                                     </li>
                                 </ul>
                             )}

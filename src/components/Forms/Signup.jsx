@@ -1,41 +1,29 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import Passwordgenerator from '../Passwordgenerator';
+import axios from 'axios';
 
 const Signup = ({ userType }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors },reset } = useForm();
     const onSubmit = async (data) => {
-        const apiEndpoint = 'http://localhost:5081/api/user'; // Backend API URL
-      
         try {
-          const response = await fetch(apiEndpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          });
-      
-          if (response.ok) {
-            const result = await response.json();
-            alert('User registered successfully with ID: ' + result.id);
-            console.log('Server response:', result);
-          } else {
-            const error = await response.text();
-            console.error('Error:', error);
-            alert('Failed to register user.');
-          }
-        } catch (err) {
-          console.error('Fetch error:', err);
-          alert('An error occurred. Check server connection.');
+            const response = await axios.post('http://localhost:5116/api/user', data);
+            console.log(response.data);  // Success response from the server
+            // You can handle success (e.g., show a success message, redirect, etc.)
+            alert('User Created')
+        } catch (error) {
+            console.error('There was an error submitting the form!', error);
+            // Handle error (e.g., show an error message)
         }
-      };
+        reset()
+    }
+    
       
       
       
 
     return (
-        <div className=' my-4  rounded-lg  w-full max-w-md'>
+        <div className=' my-4  rounded-lg  w-full max-w-md max-h-96 overflow-auto'>
             <h1 className='text-2xl font-bold text-center mb-6'>{userType} Sign In Form</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="max-w-5xl mx-auto p-8 bg-blur-xs shadow-lg rounded-lg ">
                 <div className="grid grid-cols-2 gap-6">

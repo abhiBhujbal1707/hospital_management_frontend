@@ -112,7 +112,7 @@ const MainHero = ({ user, setUser }) => {
           >
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
             <div className="relative z-10 h-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-8 w-full max-w-7xl">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-8 w-full max-w-7xl h-screen">
                 <div className="text-center text-white max-w-3xl">
                   <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">
                     Hospital Management System
