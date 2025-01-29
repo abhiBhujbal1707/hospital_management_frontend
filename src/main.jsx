@@ -18,6 +18,7 @@ createRoot(document.getElementById('root')).render(
    
     
  <>
+<<<<<<< HEAD
  {/* <App></App> */}
   {/* <DoctorDashboard></DoctorDashboard>  */}
   {/* <HospitalManagement></HospitalManagement> */}
@@ -28,5 +29,11 @@ createRoot(document.getElementById('root')).render(
    {/* <Reception /> */}
    {/* < AdminDashboard />  */}
    {/* < PatientDashboard />     */}
+=======
+ <App></App>
+ {/* <DoctorDashboard></DoctorDashboard>  */}
+  {/* <HospitalManagement></HospitalManagement> */}
+ <StaffDashboard></StaffDashboard>
+>>>>>>> 9a2593b5f9d767f6594acf3e879a4609358aae92
  </>
 )

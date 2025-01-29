@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+<<<<<<< HEAD
 import Passwordgenerator from '../Passwordgenerator';
 import axios from 'axios';
 
@@ -11,11 +12,26 @@ const Signup = ({ userType }) => {
             console.log(response.data);  // Success response from the server
             // You can handle success (e.g., show a success message, redirect, etc.)
             alert('User Created')
+=======
+// import Passwordgenerator from '../Passwordgenerator';
+import axios from 'axios';
+
+const Signup = ({ userType }) => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:5102/api/user', data);
+            console.log(response.data);  // Success response from the server
+            // You can handle success (e.g., show a success message, redirect, etc.)
+>>>>>>> 9a2593b5f9d767f6594acf3e879a4609358aae92
         } catch (error) {
             console.error('There was an error submitting the form!', error);
             // Handle error (e.g., show an error message)
         }
+<<<<<<< HEAD
         reset()
+=======
+>>>>>>> 9a2593b5f9d767f6594acf3e879a4609358aae92
     }
     
       
