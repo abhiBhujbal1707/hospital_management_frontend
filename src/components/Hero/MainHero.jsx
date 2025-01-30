@@ -1,4 +1,3 @@
-
 import React from 'react';
 import MainNavbar from '../Header/MainNavbar';
 import Signup from '../Forms/Signup';

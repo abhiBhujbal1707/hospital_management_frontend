@@ -15,11 +15,6 @@ const Signup = ({ userType }) => {
             // Handle error (e.g., show an error message)
         }
     }
-    
-      
-      
-      
-
     return (
         <div className=' my-4  rounded-lg  w-full max-w-md max-h-96 overflow-auto'>
             <h1 className='text-2xl font-bold text-center mb-6'>{userType} Sign In Form</h1>
