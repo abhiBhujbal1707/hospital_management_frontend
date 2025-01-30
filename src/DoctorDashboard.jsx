@@ -23,7 +23,7 @@ function App() {
       case 'leave':
         return <Leave />;
       case 'settings':
-        return <SettingsComponent />;
+        return <Setting />;
       default:
         return <Profile />;
     }
