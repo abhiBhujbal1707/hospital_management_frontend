@@ -11,9 +11,13 @@ import {
   X,
   Search,
   TrendingUp,
-  ChevronDown
+  ChevronDown,
+  icons
 } from 'lucide-react';
-
+import LeaveApproval from './LeaveApproval';
+import { FcLeave } from "react-icons/fc";
+import { MdManageAccounts } from "react-icons/md";
+import StaffManagement from './StaffManagement';
 // Mock data for different time periods
 const timePeriodsData = {
   daily: {
@@ -80,11 +84,11 @@ const appointments = [
 ];
 
 // Mock data for medicine inventory
-const medicines = [
-  { id: 1, name: 'Amoxicillin', category: 'Antibiotic', stock: 500, unit: 'tablets', expiryDate: '2024-12-31' },
-  { id: 2, name: 'Ibuprofen', category: 'Pain Relief', stock: 1000, unit: 'tablets', expiryDate: '2024-10-15' },
-  { id: 3, name: 'Insulin', category: 'Diabetes', stock: 200, unit: 'vials', expiryDate: '2024-06-30' },
-];
+// const medicines = [
+//   { id: 1, name: 'Amoxicillin', category: 'Antibiotic', stock: 500, unit: 'tablets', expiryDate: '2024-12-31' },
+//   { id: 2, name: 'Ibuprofen', category: 'Pain Relief', stock: 1000, unit: 'tablets', expiryDate: '2024-10-15' },
+//   { id: 3, name: 'Insulin', category: 'Diabetes', stock: 200, unit: 'vials', expiryDate: '2024-06-30' },
+// ];
 
 // Mock data for reports
 const reports = [
@@ -158,7 +162,7 @@ function Dashboard({ selectedPeriod, currentData }) {
 function Patients() {
   return (
     <div className="bg-white rounded-xl shadow-sm p-6">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6">  
         <h2 className="text-lg font-semibold text-gray-800">All Patients</h2>
         <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Add New Patient</button>
       </div>
@@ -259,47 +263,49 @@ function Appointments() {
   );
 }
 
-function Medicine() {
-  return (
-    <div className="bg-white rounded-xl shadow-sm p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-semibold text-gray-800">Medicine Inventory</h2>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Add Medicine</button>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="text-left text-sm font-medium text-gray-500">
-              <th className="pb-4">Medicine Name</th>
-              <th className="pb-4">Category</th>
-              <th className="pb-4">Stock</th>
-              <th className="pb-4">Unit</th>
-              <th className="pb-4">Expiry Date</th>
-              <th className="pb-4">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {medicines.map((medicine) => (
-              <tr key={medicine.id} className="border-t border-gray-100">
-                <td className="py-4">
-                  <div className="font-medium text-gray-900">{medicine.name}</div>
-                </td>
-                <td className="py-4 text-gray-600">{medicine.category}</td>
-                <td className="py-4 text-gray-600">{medicine.stock}</td>
-                <td className="py-4 text-gray-600">{medicine.unit}</td>
-                <td className="py-4 text-gray-600">{medicine.expiryDate}</td>
-                <td className="py-4">
-                  <button className="text-blue-600 hover:text-blue-700 mr-3">Edit</button>
-                  <button className="text-red-600 hover:text-red-700">Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
+// function Medicine() {
+//   return (
+//     <div className="bg-white rounded-xl shadow-sm p-6">
+//       <div className="flex items-center justify-between mb-6">
+//         <h2 className="text-lg font-semibold text-gray-800">Medicine Inventory</h2>
+//         <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Add Medicine</button>
+//       </div>
+//       <div className="overflow-x-auto">
+//         <table className="w-full">
+//           <thead>
+//             <tr className="text-left text-sm font-medium text-gray-500">
+//               <th className="pb-4">Medicine Name</th>
+//               <th className="pb-4">Category</th>
+//               <th className="pb-4">Stock</th>
+//               <th className="pb-4">Unit</th>
+//               <th className="pb-4">Expiry Date</th>
+//               <th className="pb-4">Actions</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {medicines.map((medicine) => (
+//               <tr key={medicine.id} className="border-t border-gray-100">
+//                 <td className="py-4">
+//                   <div className="font-medium text-gray-900">{medicine.name}</div>
+//                 </td>
+//                 <td className="py-4 text-gray-600">{medicine.category}</td>
+//                 <td className="py-4 text-gray-600">{medicine.stock}</td>
+//                 <td className="py-4 text-gray-600">{medicine.unit}</td>
+//                 <td className="py-4 text-gray-600">{medicine.expiryDate}</td>
+//                 <td className="py-4">
+//                   <button className="text-blue-600 hover:text-blue-700 mr-3">Edit</button>
+//                   <button className="text-red-600 hover:text-red-700">Delete</button>
+//                 </td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       </div>
+//     </div>
+//   );
+// }
+
+
 
 function Reports() {
   return (
@@ -400,7 +406,7 @@ function SettingsPanel() {
 }
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedPeriod, setSelectedPeriod] = useState('daily');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
@@ -425,9 +431,10 @@ function App() {
     { icon: LayoutDashboard, label: 'Dashboard', id: 'dashboard' },
     { icon: Users, label: 'Patients', id: 'patients' },
     { icon: Calendar, label: 'Appointments', id: 'appointments' },
-    { icon: Pill, label: 'Medicine', id: 'medicine' },
-    { icon: ClipboardList, label: 'Reports', id: 'reports' },
+    { icon: FcLeave, label: 'Leave Approval', id: 'medicine' },
+    { icon: MdManageAccounts, label: 'Staff Management', id: 'reports' },
     { icon: SettingsIcon, label: 'Settings', id: 'settings' },
+    // {icons:MdManageAccounts,label:'Staff Management',id:'Staff'}
   ];
 
   const renderContent = () => {
@@ -439,9 +446,9 @@ function App() {
       case 'appointments':
         return <Appointments />;
       case 'medicine':
-        return <Medicine />;
+        return <LeaveApproval />;
       case 'reports':
-        return <Reports />;
+        return <StaffManagement />;
       case 'settings':
         return <SettingsPanel />;
       default:
@@ -455,7 +462,7 @@ function App() {
       className={`${isSidebarOpen ? 'w-64' : 'w-20'} bg-white border-r border-gray-200 transition-all duration-300 ease-in-out fixed h-full z-20`}
     >
       <div className="p-4 flex items-center justify-between">
-        <h2 className={`font-bold text-xl text-blue-600 ${!isSidebarOpen && 'hidden'}`}>MedAdmin</h2>
+        <h2 className={`font-bold text-xl text-blue-600 ${!isSidebarOpen && 'hidden'}`}>Admin</h2>
         <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-gray-100 rounded-lg">
           {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -482,10 +489,10 @@ function App() {
             <Search size={20} className="text-gray-400" />
             <input type="text" placeholder="Search..." className="ml-2 bg-transparent border-none focus:outline-none w-full" />
           </div>
-          <button className="p-2 hover:bg-gray-100 rounded-full ml-4 relative">
+          {/* <button className="p-2 hover:bg-gray-100 rounded-full ml-4 relative">
             <BellRing size={20} />
             <span className="absolute top-1 right-1 bg-red-500 rounded-full w-2 h-2"></span>
-          </button>
+          </button> */}
           <img
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             alt="Profile"

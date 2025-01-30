@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { IoIosNotificationsOutline ,  } from "react-icons/io";
+import { IoIosNotificationsOutline, } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { MdDelete } from "react-icons/md";
 import TimeSlots from "../../Slots/TimeSlots";
 import { TbListDetails } from "react-icons/tb";
+import LeaveApplication from "../../Leave/LeaveApplication";
+import { FcLeave } from "react-icons/fc";
+import { Link } from 'react-scroll';
 const Reception = () => {
   const { register, handleSubmit, formState: { errors }, reset, setError } = useForm();
   const [showDetails, setshowDetails] = useState(false)
@@ -11,6 +14,7 @@ const Reception = () => {
     // { fname: "Abhijit", lname: "Bhujbal", phone: 9404016761, time: "12:45", drname: "Dr. Smith", status: "Incomplete" }
   ]);
   const [SelectTime, setSelectTime] = useState("")
+  const [leave, setleave] = useState(false)
   const handleDelete = (phone) => {
     const newPatients = patient.filter((patient) => patient.phone !== phone);
     setPatient(newPatients);
@@ -33,29 +37,29 @@ const Reception = () => {
     if (conflictingAppointment) {
       return `This doctor already has an appointment at ${time}. Please choose another time.`;
     }
-  
+
     // Check if the selected time overlaps with an existing appointment for this doctor
     const newAppointmentTime = new Date(`1970-01-01T${time}:00`);
-    
+
     // Check if the next appointment is after 45 minutes
     const timeDifference = 45 * 60 * 1000; // 45 minutes in milliseconds
     const conflictingAppointmentsForDoctor = patient.filter(
       (appointment) => appointment.drname === drname
     );
-  
+
     for (let appointment of conflictingAppointmentsForDoctor) {
       const appointmentTime = new Date(`1970-01-01T${appointment.time}:00`);
-      const timeGap = Math.abs(newAppointmentTime - appointmentTime); 
-      
+      const timeGap = Math.abs(newAppointmentTime - appointmentTime);
+
       if (timeGap < timeDifference) {
         return `Next appointment for this doctor must be at least 45 minutes apart.`;
       }
     }
-  
+
     return null; // No conflict or time constraint issue
   };
-  
-  
+
+
 
   const onSubmit = (data) => {
     const error = checkAppointmentConflict(SelectTime, data.drname); // Pass the selected time and doctor
@@ -63,12 +67,14 @@ const Reception = () => {
       setError("time", { type: "manual", message: error });
       return;
     }
-  
+
     setPatient((prev) => [...prev, { ...data, time: SelectTime, status: "Scheduled" }]);
     reset();
   };
-  
-  
+
+  const handleLeave = () => {
+    setleave(prev => !prev)
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
@@ -84,6 +90,14 @@ const Reception = () => {
               Notifications
               <IoIosNotificationsOutline />
             </li>
+            <Link
+              to="leave-section"  // Scrolls to the section with this ID
+              smooth={true}        // Enables smooth scrolling
+              duration={500}       // Duration of the scroll in ms
+              className=" flex gap-2 items-center py-2 px-3 cursor-pointer"
+            >
+              <FcLeave /> Apply for Leave
+            </Link>
           </ul>
         </nav>
       </aside>
@@ -179,7 +193,7 @@ const Reception = () => {
                 <input
                   type="time"
                   id="time"
-                  {...register("time", {  })}
+                  {...register("time", {})}
                   value={SelectTime} // Bind the selected time here
                   className="w-full h-12 pl-2 bg-zinc-100 border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 />
@@ -224,7 +238,7 @@ const Reception = () => {
                     <td className="p-4">{p.status}</td>
                     <td className="p-4 flex gap-2">
                       <MdDelete onClick={() => handleDelete(p.phone)} className="cursor-pointer " />
-                      <TbListDetails className="cursor-pointer"/>
+                      <TbListDetails className="cursor-pointer" />
                     </td>
                   </tr>
                 ))}
@@ -232,6 +246,7 @@ const Reception = () => {
             </table>
           </div>
         </div>
+        <LeaveApplication />
       </main>
     </div>
   );

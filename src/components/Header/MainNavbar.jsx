@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { AiOutlineDown } from "react-icons/ai";
+import { Link } from 'react-scroll';
 
-const MainNavbar = ({user,setUser}) => {
+const MainNavbar = ({ user, setUser }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSignUpOpen, setIsSignUpOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('Patient');
@@ -16,7 +17,7 @@ const MainNavbar = ({user,setUser}) => {
     };
 
     return (
-        <nav className="bg-zinc-500  z-10">
+        <nav className="bg-zinc-500  z-10 sticky top-0 w-full">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="#" className="flex items-center space-x-3">
                     <img src="/logo.png" className="h-8" alt="Logo" />
@@ -39,16 +40,26 @@ const MainNavbar = ({user,setUser}) => {
                 <div className={`w-full md:block md:w-auto ${isMenuOpen ? 'block' : 'hidden'}`} id="navbar-default">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0">
                         <li><a href="#" className="block py-2 px-3">Home</a></li>
-                        <li><a href="#" className="block py-2 px-3">About</a></li>
+                        <li>
+                            <Link
+                                to="about-section"  // Scrolls to the section with this ID
+                                smooth={true}        // Enables smooth scrolling
+                                duration={500}       // Duration of the scroll in ms
+                                className="block py-2 px-3 cursor-pointer"
+                            >
+                                About
+                            </Link>
+                        </li>
                         <li><a href="#" className="block py-2 px-3">Doctors</a></li>
-                        <li><a href="#" className="block py-2 px-3">Contact</a></li>
+                        {/* <li><a href="#" className="block py-2 px-3">Contact</a></li> */}
                         <li className="relative">
                             <button onClick={toggleSignUp} className="block py-2 px-3 w-full text-left">
                                 <div className="flex items-center gap-1">
-                                    SignIn {selectedOption} <AiOutlineDown />
+                                    SignIn {selectedOption}
+                                    {/* <AiOutlineDown /> */}
                                 </div>
                             </button>
-                            {isSignUpOpen && (
+                            {/* {isSignUpOpen && (
                                 <ul className="absolute flex flex-col mt-2 bg-white border rounded shadow-lg dark:bg-gray-800">
                                     <li>
                                         <a href="#" className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 ${selectedOption === 'Admin' ? 'bg-gray-100 dark:bg-gray-600' : ''}`} onClick={() =>{setSelectedOption('Admin')
@@ -79,7 +90,7 @@ const MainNavbar = ({user,setUser}) => {
                                         } }>Receptionist</a>
                                     </li>
                                 </ul>
-                            )}
+                            )} */}
                         </li>
                         <li><a href="#" className="block py-2 px-3" onClick={() => setUser('Login')}  >Login</a></li>
                     </ul>
