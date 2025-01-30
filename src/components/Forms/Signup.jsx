@@ -1,18 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-<<<<<<< HEAD
-import Passwordgenerator from '../Passwordgenerator';
-import axios from 'axios';
-
-const Signup = ({ userType }) => {
-    const { register, handleSubmit, formState: { errors },reset } = useForm();
-    const onSubmit = async (data) => {
-        try {
-            const response = await axios.post('http://localhost:5116/api/user', data);
-            console.log(response.data);  // Success response from the server
-            // You can handle success (e.g., show a success message, redirect, etc.)
-            alert('User Created')
-=======
 // import Passwordgenerator from '../Passwordgenerator';
 import axios from 'axios';
 
@@ -23,21 +10,11 @@ const Signup = ({ userType }) => {
             const response = await axios.post('http://localhost:5102/api/user', data);
             console.log(response.data);  // Success response from the server
             // You can handle success (e.g., show a success message, redirect, etc.)
->>>>>>> 9a2593b5f9d767f6594acf3e879a4609358aae92
         } catch (error) {
             console.error('There was an error submitting the form!', error);
             // Handle error (e.g., show an error message)
         }
-<<<<<<< HEAD
-        reset()
-=======
->>>>>>> 9a2593b5f9d767f6594acf3e879a4609358aae92
     }
-    
-      
-      
-      
-
     return (
         <div className=' my-4  rounded-lg  w-full max-w-md max-h-96 overflow-auto'>
             <h1 className='text-2xl font-bold text-center mb-6'>{userType} Sign In Form</h1>
