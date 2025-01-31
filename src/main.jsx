@@ -17,14 +17,14 @@ createRoot(document.getElementById('root')).render(
     
  <>
  {/* <App></App> */}
-   <DoctorDashboard></DoctorDashboard> 
+    {/* <DoctorDashboard></DoctorDashboard>  */}
   {/* <HospitalManagement></HospitalManagement> */}
   {/* <div className='w-full bg-white'>Hello </div> */}
- {/* <StaffDashboard></StaffDashboard>  */}
+   {/* <StaffDashboard></StaffDashboard>  */}
     {/* <Login></Login> */}
     {/* <LeaveApplicationForm /> */}
    {/* <Reception /> */}
    {/* < AdminDashboard />  */}
-  {/* { <PatientDashboard /> } */}
+  { <PatientDashboard /> }
  </>
 );

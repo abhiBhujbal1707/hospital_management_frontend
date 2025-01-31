@@ -7,7 +7,7 @@ const Signup = ({ userType }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post('http://localhost:5102/api/user', data);
+            const response = await axios.post('http://localhost:5116/api/user', data);
             console.log(response.data);  // Success response from the server
             // You can handle success (e.g., show a success message, redirect, etc.)
         } catch (error) {

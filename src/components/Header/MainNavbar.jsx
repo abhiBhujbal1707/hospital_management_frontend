@@ -53,15 +53,18 @@ const MainNavbar = ({ user, setUser }) => {
                         <li><a href="#" className="block py-2 px-3">Doctors</a></li>
                         {/* <li><a href="#" className="block py-2 px-3">Contact</a></li> */}
                         <li className="relative">
-                            <button onClick={toggleSignUp} className="block py-2 px-3 w-full text-left">
+                            <button onClick={()=>{toggleSignUp
+                                setUser('Patient')
+                                setSelectedOption('Patient')
+                            }} className="block py-2 px-3 w-full text-left">
                                 <div className="flex items-center gap-1">
                                     SignIn {selectedOption}
                                     {/* <AiOutlineDown /> */}
                                 </div>
                             </button>
-                            {/* {isSignUpOpen && (
+                             {isSignUpOpen && (
                                 <ul className="absolute flex flex-col mt-2 bg-white border rounded shadow-lg dark:bg-gray-800">
-                                    <li>
+                                    {/* <li>
                                         <a href="#" className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 ${selectedOption === 'Admin' ? 'bg-gray-100 dark:bg-gray-600' : ''}`} onClick={() =>{setSelectedOption('Admin')
                                           setIsSignUpOpen(false)
                                           setUser('Admin')  
@@ -74,23 +77,23 @@ const MainNavbar = ({ user, setUser }) => {
                                          setIsSignUpOpen(false)
                                          setUser('Doctor')
                                          }}>Doctor</a>
-                                    </li>
-                                    <li>
+                                    </li> */}
+                                    {/* <li>
                                         <a href="#" className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 ${selectedOption === 'Patient' ? 'bg-gray-100 dark:bg-gray-600' : ''}`} onClick={() =>{
                                             setIsSignUpOpen(false)
                                             setSelectedOption('Patient')
                                             setUser('Patient')
                                         } }>Patient</a>
-                                    </li>
-                                    <li>
+                                    </li> */}
+                                    {/* <li>
                                         <a href="#" className={`block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 ${selectedOption === 'Staff' ? 'bg-gray-100 dark:bg-gray-600' : ''}`} onClick={() =>{
                                             setIsSignUpOpen(false)
                                             setSelectedOption('Receptionist') 
                                             setUser('Receptionist')     
                                         } }>Receptionist</a>
-                                    </li>
+                                    </li> */}
                                 </ul>
-                            )} */}
+                            )} 
                         </li>
                         <li><a href="#" className="block py-2 px-3" onClick={() => setUser('Login')}  >Login</a></li>
                     </ul>

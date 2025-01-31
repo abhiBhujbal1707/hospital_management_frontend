@@ -60,6 +60,7 @@ const StaffManagement = () => {
           <input {...register('phone', { required: 'Phone Number is required' })} placeholder="Phone Number" className="w-full px-4 py-2 border rounded-lg" />
           <input {...register('email', { required: 'Email is required' })} placeholder="Email" className="w-full px-4 py-2 border rounded-lg" />
           <input {...register('address', { required: 'Address is required' })} placeholder="Address" className="w-full px-4 py-2 border rounded-lg" />
+          <input {...register('password', { required: 'Password is required' })} placeholder="Password" className="w-full px-4 py-2 border rounded-lg" />
           <label className="block">Date of Birth</label>
           <input {...register('dob', { required: 'Date of Birth is required' })} type="date" className="w-full px-4 py-2 border rounded-lg" />
           <label className="block">Joining Date</label>

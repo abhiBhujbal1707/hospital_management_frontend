@@ -1,0 +1,142 @@
+database:
+
+
+# Database Model for Hospital Management System
+
+## Entities and Tables
+
+### 1. **Users**
+- **user_id** (Primary Key)
+- **username** (Unique)
+- **password_hash**
+- **email** (Unique)
+- **phone_number**
+- **role** (ENUM: `admin`, `doctor`, `patient`, `accountant`)
+- **created_at**
+- **updated_at**
+
+### 2. **Doctors**
+- **doctor_id** (Primary Key)
+- **user_id** (Foreign Key referencing Users)
+- **first_name**
+- **last_name**
+- **specialization**
+- **license_number**
+- **experience_years**
+- **department**
+- **schedule_id** (Foreign Key referencing Doctor_Schedule)
+- **status** (ENUM: `active`, `inactive`)
+
+### 3. **Patients**
+- **patient_id** (Primary Key)
+- **user_id** (Foreign Key referencing Users)
+- **first_name**
+- **last_name**
+- **date_of_birth**
+- **gender**
+- **blood_group**
+- **address**
+- **emergency_contact**
+- **medical_history** (TEXT)
+
+### 4. **Appointments**
+- **appointment_id** (Primary Key)
+- **patient_id** (Foreign Key referencing Patients)
+- **doctor_id** (Foreign Key referencing Doctors)
+- **appointment_date**
+- **appointment_time**
+- **status** (ENUM: `scheduled`, `completed`, `cancelled`)
+- **reason_for_visit**
+
+### 5. **Doctor_Schedule**
+- **schedule_id** (Primary Key)
+- **doctor_id** (Foreign Key referencing Doctors)
+- **available_days** (JSON or VARCHAR)
+- **available_time_slots** (JSON or VARCHAR)
+
+### 6. **Medical_Records**
+- **record_id** (Primary Key)
+- **patient_id** (Foreign Key referencing Patients)
+- **doctor_id** (Foreign Key referencing Doctors)
+- **diagnosis**
+- **treatment**
+- **prescription** (TEXT)
+- **notes**
+- **created_at**
+
+### 7. **Billing**
+- **bill_id** (Primary Key)
+- **appointment_id** (Foreign Key referencing Appointments)
+- **patient_id** (Foreign Key referencing Patients)
+- **total_amount**
+- **status** (ENUM: `paid`, `unpaid`, `pending`)
+- **payment_date**
+
+### 8. **Payment_Details**
+- **payment_id** (Primary Key)
+- **bill_id** (Foreign Key referencing Billing)
+- **payment_method** (ENUM: `cash`, `credit_card`, `insurance`)
+- **payment_status** (ENUM: `success`, `failed`)
+- **transaction_id** (Optional for card/insurance payments)
+
+### 9. **Admin_Actions**
+- **action_id** (Primary Key)
+- **admin_id** (Foreign Key referencing Users)
+- **action_type** (ENUM: `add_doctor`, `remove_doctor`, `update_schedule`, etc.)
+- **timestamp**
+
+### 10. **Departments**
+- **department_id** (Primary Key)
+- **name**
+- **description**
+
+### 11. **Reports**
+- **report_id** (Primary Key)
+- **patient_id** (Foreign Key referencing Patients)
+- **medical_record_id** (Foreign Key referencing Medical_Records)
+- **report_type**
+- **file_path** (Path to the stored report document)
+- **created_at**
+
+### 12. **Notifications**
+- **notification_id** (Primary Key)
+- **user_id** (Foreign Key referencing Users)
+- **message**
+- **status** (ENUM: `read`, `unread`)
+- **created_at**
+
+### 13. **Accounts**
+- **account_id** (Primary Key)
+- **user_id** (Foreign Key referencing Users)
+- **role** (ENUM: `billing_manager`, `accountant`)
+- **permissions** (JSON for detailed permissions)
+
+### 14. **Audit_Log**
+- **log_id** (Primary Key)
+- **user_id** (Foreign Key referencing Users)
+- **action**
+- **timestamp**
+
+
+## Relationships and Constraints
+
+### Primary and Foreign Keys
+1. **Users** is the base table referenced by **Doctors**, **Patients**, **Accounts**, etc.
+2. **Appointments** links **Doctors** and **Patients** with a many-to-one relationship.
+3. **Billing** is associated with **Appointments** and **Patients**.
+4. **Medical_Records** tie to **Patients** and **Doctors**.
+5. **Doctor_Schedule** provides availability for each doctor.
+6. **Admin_Actions** tracks changes made by admin users.
+
+### Indexing
+- **Index** on foreign key columns for **Appointments**, **Billing**, **Medical_Records** for fast queries.
+- **Unique constraints** on columns like **username** in Users and **license_number** in Doctors.
+
+### Other Considerations
+1. **Security**: Store passwords using secure hashing algorithms.
+2. **Data Retention Policies**: Implement archival for older medical records.
+3. **Audit Trails**: Use **Audit_Log** for tracking system actions.
+4. **Scalability**: Use JSON or separate tables for flexible fields (e.g., Doctor_Schedule).
+
+This model provides a comprehensive and flexible structure, ensuring scalability, security, and maintainability for your hospital management system.
+
