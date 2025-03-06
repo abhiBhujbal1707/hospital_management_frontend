@@ -1,54 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { MdDelete } from 'react-icons/md';
-import { TbListDetails } from 'react-icons/tb';
 
-// Sample data for appointments
-const appointmentData = [
-  {
-    id: 1,
-    fname: 'John',
-    lname: 'Doe',
-    phone: '1234567890',
-    time: '10:00 AM',
-    drname: 'Dr. Smith',
-    status: 'Arrived',
-  },
-  {
-    id: 2,
-    fname: 'Jane',
-    lname: 'Doe',
-    phone: '0987654321',
-    time: '11:00 AM',
-    drname: 'Dr. Williams',
-    status: 'Scheduled',
-  },
-  {
-    id: 3,
-    fname: 'Sam',
-    lname: 'Wilson',
-    phone: '1122334455',
-    time: '1:00 PM',
-    drname: 'Dr. Smith',
-    status: 'Arrived',
-  },
-];
+import React, { useEffect, useContext } from "react";
+import { MdDelete } from "react-icons/md";
+import { TbListDetails } from "react-icons/tb";
+import axios from "axios";
+import MyContext from "../../../context/MyContext";
 
 const Patients = () => {
-  const [patients, setPatients] = useState([]);
+  const { Patients, setPatients } = useContext(MyContext);
 
   useEffect(() => {
-    // In a real app, fetch data from the backend (e.g., MongoDB)
-    setPatients(appointmentData); // Sample data for now
+    const fetchAppointments = async () => {
+      try {
+        const response = await axios.get("http://localhost:5116/api/appointments");
+        setPatients(response.data);
+        console.log("Updated Patients state:", response.data);
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    };
+
+    fetchAppointments();
   }, []);
 
-  const handleDelete = (phone) => {
-    // Add functionality to delete an appointment
-    setPatients(patients.filter(patient => patient.phone !== phone));
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5116/api/appointments/${id}`);
+      setPatients((prevPatients) => prevPatients.filter((patient) => patient._id !== id));
+      console.log("Appointment deleted successfully");
+    } catch (error) {
+      console.error("Error deleting appointment:", error);
+    }
   };
+  
 
   const handleDetails = (patient) => {
-    // Add functionality for viewing more details about the patient (e.g., open a modal or navigate to another page)
-    alert(`Viewing details for ${patient.fname} ${patient.lname}`);
+    console.log("Patient Details:", patient);
+    alert(`Viewing details for ${patient.firstName} ${patient.lastName}`);
   };
 
   return (
@@ -61,26 +48,32 @@ const Patients = () => {
             <th className="p-4 text-left">Phone</th>
             <th className="p-4 text-left">Time</th>
             <th className="p-4 text-left">Doctor Name</th>
+            <th className="p-4 text-left">Date</th> {/* ✅ New Date Column */}
             <th className="p-4 text-left">Status</th>
             <th className="p-4 text-left">Actions</th>
           </tr>
         </thead>
         <tbody className="font-bold">
-          {patients.length === 0 ? (
+          {!Patients || Patients.length === 0 ? (
             <tr>
-              <td colSpan="6" className="p-4 text-center text-gray-500">No appointments for today</td>
+              <td colSpan="7" className="p-4 text-center text-gray-500">
+                No appointments for today
+              </td>
             </tr>
           ) : (
-            patients.map((patient) => (
-              <tr key={patient.id}>
-                <td className="p-4">{patient.fname} {patient.lname}</td>
-                <td className="p-4">{patient.phone}</td>
+            Patients.map((patient) => (
+              <tr key={patient._id || patient.Id || `${patient.firstName}-${patient.lastName}-${patient.time}`}>
+                <td className="p-4">{patient.firstName} {patient.lastName}</td>
+                <td className="p-4">{patient.phoneNumber}</td>
                 <td className="p-4">{patient.time}</td>
-                <td className="p-4">{patient.drname}</td>
+                <td className="p-4">{patient.doctorName}</td>
+                <td className="p-4">
+                  {new Date(patient.date).toLocaleDateString("en-GB")} {/* ✅ Formatted Date */}
+                </td>
                 <td className="p-4">{patient.status}</td>
                 <td className="p-4 flex gap-2">
-                  <MdDelete onClick={() => handleDelete(patient.phone)} className="cursor-pointer text-red-500" />
-                  <TbListDetails onClick={() => handleDetails(patient)} className="cursor-pointer text-blue-500" />
+                  <MdDelete onClick={() => handleDelete(patient._id)} className="cursor-pointer text-red-500" />
+                  {/*   <TbListDetails onClick={() => handleDetails(patient)} className="cursor-pointer text-blue-500" /> */}
                 </td>
               </tr>
             ))

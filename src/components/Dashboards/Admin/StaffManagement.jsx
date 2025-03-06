@@ -1,18 +1,15 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 const StaffManagement = () => {
   const [staffList, setStaffList] = useState([]);
   const [currentStaffId, setCurrentStaffId] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    reset,
-    formState: { errors },
-  } = useForm();
+
+  const { register, handleSubmit, setValue, watch, reset, formState: { errors } } = useForm();
+
 
   const role = watch('role');
 
@@ -24,16 +21,41 @@ const StaffManagement = () => {
     setStaffList(mockStaffData);
   }, []);
 
-  const onSubmit = (data) => {
-    if (currentStaffId !== null) {
-      setStaffList((prev) => prev.map((staff) => (staff.id === currentStaffId ? { ...staff, ...data, id: currentStaffId } : staff)));
-      setCurrentStaffId(null);
-    } else {
-      const newStaffEntry = { id: staffList.length + 1, ...data };
-      setStaffList((prev) => [...prev, newStaffEntry]);
+
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+
+    // Append text fields
+    Object.keys(data).forEach((key) => {
+      if (key !== "profileImage") {
+        formData.append(key, data[key]);
+      }
+    });
+
+    // Append the image file
+    if (data.profileImage[0]) {
+      formData.append("profileImage", data.profileImage[0]);
     }
-    reset();
+
+    try {
+      const response = await fetch("http://localhost:5116/api/staff", {
+        method: "POST",
+        body: formData, // Send FormData instead of JSON
+      });
+
+      const result = await response.json();
+      console.log("Response:", result);
+      if (response.ok) {
+        alert(result.message);
+      } else {
+        alert("Error: " + result.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
+
 
   const handleEdit = (staff) => {
     setCurrentStaffId(staff.id);
@@ -60,7 +82,7 @@ const StaffManagement = () => {
           <input {...register('phone', { required: 'Phone Number is required' })} placeholder="Phone Number" className="w-full px-4 py-2 border rounded-lg" />
           <input {...register('email', { required: 'Email is required' })} placeholder="Email" className="w-full px-4 py-2 border rounded-lg" />
           <input {...register('address', { required: 'Address is required' })} placeholder="Address" className="w-full px-4 py-2 border rounded-lg" />
-          <input {...register('password', { required: 'Password is required' })} placeholder="Password" className="w-full px-4 py-2 border rounded-lg" />
+          <input type='password' {...register('passwordHash', { required: 'Password is required' })} placeholder="Password" className="w-full px-4 py-2 border rounded-lg" />
           <label className="block">Date of Birth</label>
           <input {...register('dob', { required: 'Date of Birth is required' })} type="date" className="w-full px-4 py-2 border rounded-lg" />
           <label className="block">Joining Date</label>
@@ -72,13 +94,45 @@ const StaffManagement = () => {
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
           </select>
+          <label htmlFor="profileImage">Enter Profile Image</label>
+          <input
+            type="file"
+            id="profileImage"
+            {...register("profileImage", { required: "Give Image" })}
+            className="w-full px-4 py-2 border rounded-lg"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                const imageUrl = URL.createObjectURL(file);
+                setImagePreview(imageUrl);
+              }
+            }}
+          />
+          {imagePreview && (
+            <div className="mt-4">
+              <img src={imagePreview} alt="Preview" className="w-32 h-32 object-cover rounded-lg border" />
+              <button
+                type="button"
+                className="mt-2 px-4 py-2 bg-red-500 text-white rounded-lg"
+                onClick={() => {
+                  setImagePreview(null);
+                  setValue("profileImage", null); // Reset file input
+                }}
+              >
+                Remove Image
+              </button>
+            </div>
+          )}
+
+
           <input {...register('emergencyContact', { required: 'Emergency Contact is required' })} placeholder="Emergency Contact" className="w-full px-4 py-2 border rounded-lg" />
           <select {...register('role', { required: 'Role is required' })} className="w-full px-4 py-2 border rounded-lg">
             <option value="">Select Role</option>
             <option value="Doctor">Doctor</option>
-            
+
             <option value="Receptionist">Receptionist</option>
-           
+
           </select>
           {role === 'Doctor' && (
             <>

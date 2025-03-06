@@ -13,9 +13,9 @@ const MainHero = ({ user, setUser }) => {
   return (
     <>
       <div>
-        <div className=" z-20 fixed top-0 w-full ">
+        {/* <div className=" z-20 fixed top-0 w-full ">
           <MainNavbar user={user} setUser={setUser}  />
-        </div>
+        </div> */}
 
         <div className="min-h-screen bg-gray-50 z-0">
           <div

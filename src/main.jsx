@@ -12,10 +12,15 @@ import Signup from './components/Forms/Signup.jsx'
 import Reception from './components/Dashboards/Staff/Reception.jsx'
 import AdminDashboard from './components/Dashboards/Admin/AdminDashboard.jsx'
 import PatientDashboard from "./components/Dashboards/Patient/PatientDashboard.jsx";
+import MyProvider from './context/MyProvider.jsx'
+import { BrowserRouter as Router ,Route , Routes } from 'react-router-dom'
+import MainNavbar from './components/Header/MainNavbar.jsx'
+
+
 createRoot(document.getElementById('root')).render(
    
     
- <>
+ <MyProvider>
  {/* <App></App> */}
     {/* <DoctorDashboard></DoctorDashboard>  */}
   {/* <HospitalManagement></HospitalManagement> */}
@@ -24,7 +29,7 @@ createRoot(document.getElementById('root')).render(
     {/* <Login></Login> */}
     {/* <LeaveApplicationForm /> */}
    {/* <Reception /> */}
-   {/* < AdminDashboard />  */}
-  { <PatientDashboard /> }
- </>
+   < AdminDashboard /> 
+  {/* { <PatientDashboard /> } */}
+ </MyProvider>
 );

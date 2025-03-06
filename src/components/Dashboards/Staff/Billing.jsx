@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useContext, useState } from 'react';
+import MyContext from '../../../context/MyContext';
 const patients = [
   { id: 1, patientName: 'John Doe', mainBill: 200, items: [{ item: 'Consultation Fees', price: 200 }], paidAmount: 0 },
   { id: 2, patientName: 'Jane Doe', mainBill: 150, items: [{ item: 'Consultation Fees', price: 150 }], paidAmount: 0 },
@@ -13,7 +13,8 @@ const Billing = () => {
   const [newItem, setNewItem] = useState({ item: '', price: 0, patientId: null });
   const [viewItems, setViewItems] = useState(null);
   const [partialPayment, setPartialPayment] = useState({ amount: 0, patientId: null });
-
+  const {Patients , setPatients} = useContext(MyContext)
+  console.log("Patients:",Patients)
   const addItemToBill = () => {
     if (!newItem.item || newItem.price <= 0 || newItem.patientId === null) return;
 

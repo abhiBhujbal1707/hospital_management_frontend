@@ -11,7 +11,7 @@ const Signup = ({ userType }) => {
             console.log(response.data);  // Success response from the server
             // You can handle success (e.g., show a success message, redirect, etc.)
         } catch (error) {
-            console.error('There was an error submitting the form!', error);
+            console.error('There was an error submitting the form!', error.message);
             // Handle error (e.g., show an error message)
         }
     }
@@ -143,7 +143,7 @@ const Signup = ({ userType }) => {
                         {errors.bloodgrp && <p className="text-red-500 text-sm mt-1">{errors.bloodgrp.message}</p>}
                     </div>
 
-                    {userType === 'Doctor' && (
+                    {/* {userType === 'Doctor' && (
                         <>
                             <div>
                                 <label htmlFor="specialization" className="block text-sm font-semibold text-gray-800">Specialization</label>
@@ -178,7 +178,7 @@ const Signup = ({ userType }) => {
                                 {errors.exp && <p className="text-red-500 text-sm mt-1">{errors.exp.message}</p>}
                             </div>
                         </>
-                    )}
+                    )} */}
 
                     {userType === 'Patient' && (
                         <>

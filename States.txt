@@ -1,0 +1,3 @@
+1.Login state to check if user is logged in or not . 
+2. usertype state to check if usertype
+3. state for userinfo iff user logged in
