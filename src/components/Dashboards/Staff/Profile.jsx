@@ -82,7 +82,7 @@ const Profile = () => {
   const { Staff } = useContext(MyContext);
 console.log("Staff state", Staff)
   // Backend URL (Modify if needed)
-  const backendUrl = "http://localhost:5116"; // Change this if your API is running on a different port
+  const backendUrl = "http://localhost:5002"; // Change this if your API is running on a different port
 
   // Construct the full image URL
   const profileImageUrl = Staff.imageUrl
@@ -94,7 +94,9 @@ console.log("Staff state", Staff)
       <div className="bg-white shadow-lg rounded-2xl p-6 md:p-8 w-full max-w-3xl flex flex-col md:flex-row items-center gap-6">
         {/* Profile Image */}
         <img
-          src={profileImageUrl}
+          src={`http://localhost:5002${Staff.
+            profileImage
+            }`}
           alt="Staff Profile"
           className="w-28 h-28 md:w-36 md:h-36 rounded-full border-4 border-gray-200 object-cover shadow-md"
         />

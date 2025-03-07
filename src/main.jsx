@@ -15,13 +15,14 @@ import PatientDashboard from "./components/Dashboards/Patient/PatientDashboard.j
 import MyProvider from './context/MyProvider.jsx'
 import { BrowserRouter as Router ,Route , Routes } from 'react-router-dom'
 import MainNavbar from './components/Header/MainNavbar.jsx'
-
-
+import MyContext from './context/MyContext.js'
+import { useContext } from 'react'
+import AppointmentBooking from './components/AppointmentComponent.jsx'
 createRoot(document.getElementById('root')).render(
    
     
  <MyProvider>
- {/* <App></App> */}
+ <App></App>
     {/* <DoctorDashboard></DoctorDashboard>  */}
   {/* <HospitalManagement></HospitalManagement> */}
   {/* <div className='w-full bg-white'>Hello </div> */}
@@ -29,7 +30,8 @@ createRoot(document.getElementById('root')).render(
     {/* <Login></Login> */}
     {/* <LeaveApplicationForm /> */}
    {/* <Reception /> */}
-   < AdminDashboard /> 
+   {/* < AdminDashboard />  */}
   {/* { <PatientDashboard /> } */}
+  {/* <AppointmentBooking></AppointmentBooking> */}
  </MyProvider>
 );

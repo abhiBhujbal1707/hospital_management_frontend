@@ -25,35 +25,31 @@ const StaffManagement = () => {
   const onSubmit = async (data) => {
     const formData = new FormData();
 
-    // Append text fields
     Object.keys(data).forEach((key) => {
-      if (key !== "profileImage") {
-        formData.append(key, data[key]);
-      }
+        if (key !== "profileImage") {
+            formData.append(key, data[key]);
+        }
     });
 
     // Append the image file
     if (data.profileImage[0]) {
-      formData.append("profileImage", data.profileImage[0]);
+        formData.append("profileImage", data.profileImage[0]);
     }
 
     try {
-      const response = await fetch("http://localhost:5116/api/staff", {
-        method: "POST",
-        body: formData, // Send FormData instead of JSON
-      });
+        const response = await fetch("http://localhost:5002/api/staff/register", {
+            method: "POST",
+            body: formData, // Send FormData instead of JSON
+        });
 
-      const result = await response.json();
-      console.log("Response:", result);
-      if (response.ok) {
+        const result = await response.json();
+        console.log("Response:", result);
         alert(result.message);
-      } else {
-        alert("Error: " + result.message);
-      }
     } catch (error) {
-      console.error("Error:", error);
+        console.error("Error:", error);
     }
-  };
+};
+
 
 
 

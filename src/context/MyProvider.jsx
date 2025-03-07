@@ -8,8 +8,9 @@ const MyProvider = ({children}) =>{
     const [Staff, setStaff] = useState(null)
     const [Appointment, setAppointment] = useState(null)
     const [Patients, setPatients] = useState(null)
+    const [Doctors, setDoctors] = useState([])
     return(
-        <MyContext.Provider value={{isLoggedIn,setisLoggedIn , Staff , setStaff,Appointment,setAppointment,Patients,setPatients}}>
+        <MyContext.Provider value={{Doctors, setDoctors,isLoggedIn,setisLoggedIn , Staff , setStaff,Appointment,setAppointment,Patients,setPatients}}>
             {children}
         </MyContext.Provider>
     )

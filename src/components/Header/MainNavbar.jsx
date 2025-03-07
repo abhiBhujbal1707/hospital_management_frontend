@@ -127,6 +127,7 @@ import MyContext from "../../context/MyContext";
 import { BrowserRouter as Router, Route, Routes, Link as Link2, useNavigate } from "react-router-dom";
 import ReceptionistDashboard from "../Dashboards/Staff/Reception";
 import MainHero from "../Hero/MainHero";
+import DoctorDashboard from "../../DoctorDashboard";
 
 const MainNavbar = ({ user, setUser }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -134,6 +135,7 @@ const MainNavbar = ({ user, setUser }) => {
     const [selectedOption, setSelectedOption] = useState("Patient");
 
     const { isLoggedIn, setisLoggedIn } = useContext(MyContext);
+    const { Staff, setStaff } = useContext(MyContext);
     const navigate = useNavigate();
 
     const toggleMenu = () => {
@@ -197,7 +199,7 @@ const MainNavbar = ({ user, setUser }) => {
                                     <button onClick={toggleSignUp} className="block py-2 px-3 w-full text-left text-white hover:text-gray-300">
                                         <div className="flex items-center gap-1">
                                             SignIn {selectedOption}
-                                           
+
                                         </div>
                                     </button>
                                     {/* {isSignUpOpen && (
@@ -214,9 +216,18 @@ const MainNavbar = ({ user, setUser }) => {
                         {isLoggedIn && (
                             <>
                                 <li>
-                                    <Link2 to="/dashboard" className="py-2 px-3 text-white hover:text-gray-300">
+
+                                    {Staff.role === "Receptionist" && (<><Link2 to="/dashboard" className="py-2 px-3 text-white hover:text-gray-300">
                                         Dashboard
-                                    </Link2>
+                                    </Link2></>)}
+                                    {Staff.role === "Doctor" && (<><Link2 to="/doctor-dashboard" className="py-2 px-3 text-white hover:text-gray-300">
+                                        Dashboard
+                                    </Link2></>)}
+
+
+
+
+
                                 </li>
                                 <li>
                                     <button
@@ -233,6 +244,7 @@ const MainNavbar = ({ user, setUser }) => {
             </div>
             <Routes>
                 <Route path="/dashboard" element={<ReceptionistDashboard />} />
+                <Route path="/doctor-dashboard" element={< DoctorDashboard />} ></Route>
                 <Route path="/" element={<MainHero user={user} setUser={setUser} />} />
             </Routes>
         </nav>

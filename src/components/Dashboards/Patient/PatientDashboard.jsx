@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { Calendar, Clock, User, Phone, Mail, FileText, MapPin, Calendar as CalendarIcon } from 'lucide-react';
+import { Calendar as CalendarIcon } from 'lucide-react';
 
 function App() {
   const [appointments, setAppointments] = useState([]);
@@ -10,8 +11,17 @@ function App() {
     date: '',
     time: '',
     address: '',
-    symptoms: ''
+    symptoms: '',
+    doctor: ''
   });
+
+  const doctors = [
+    { name: 'Dr. Smith', specialization: 'Cardiologist' },
+    { name: 'Dr. Johnson', specialization: 'Dermatologist' },
+    { name: 'Dr. Williams', specialization: 'Neurologist' },
+    { name: 'Dr. Brown', specialization: 'Pediatrician' },
+    { name: 'Dr. Jones', specialization: 'Orthopedic' }
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +41,8 @@ function App() {
       date: '',
       time: '',
       address: '',
-      symptoms: ''
+      symptoms: '',
+      doctor: ''
     });
   };
 
@@ -55,156 +66,64 @@ function App() {
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-6">Book an Appointment</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Full Name</label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <User className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    required
-                    className="pl-10 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Full Name</label>
+                  <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} required className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Email</label>
+                  <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                 </div>
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Email</label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="pl-10 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Phone</label>
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                 </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Phone</label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Phone className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="pl-10 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Date</label>
-                  <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Calendar className="h-5 w-5 text-gray-400" />
-                    </div>
-                    <input
-                      type="date"
-                      name="date"
-                      value={formData.date}
-                      onChange={handleInputChange}
-                      required
-                      className="pl-10 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
+                  <input type="date" name="date" value={formData.date} onChange={handleInputChange} required className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                 </div>
-
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Time</label>
-                  <div className="mt-1 relative rounded-md shadow-sm">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Clock className="h-5 w-5 text-gray-400" />
-                    </div>
-                    <input
-                      type="time"
-                      name="time"
-                      value={formData.time}
-                      onChange={handleInputChange}
-                      required
-                      className="pl-10 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
+                  <input type="time" name="time" value={formData.time} onChange={handleInputChange} required className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Address</label>
+                  <input type="text" name="address" value={formData.address} onChange={handleInputChange} required className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                 </div>
               </div>
-
               <div>
-                <label className="block text-sm font-medium text-gray-700">Address</label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <MapPin className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    required
-                    className="pl-10 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
+                <label className="block text-sm font-medium text-gray-700">Select Doctor</label>
+                <select name="doctor" value={formData.doctor} onChange={handleInputChange} required className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                  <option value="">Select a Doctor</option>
+                  {doctors.map((doc, index) => (
+                    <option key={index} value={`${doc.name} - ${doc.specialization}`}>{`${doc.name} (${doc.specialization})`}</option>
+                  ))}
+                </select>
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Symptoms</label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <FileText className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <textarea
-                    name="symptoms"
-                    value={formData.symptoms}
-                    onChange={handleInputChange}
-                    required
-                    rows={3}
-                    className="pl-10 focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
+              <button type="submit" className="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                 Book Appointment
               </button>
             </form>
           </div>
-
-          {/* Appointments List */}
+          {/* Past Appointments */}
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-6">Your Appointments</h2>
-            <div className="space-y-4">
-              {appointments.length === 0 ? (
-                <p className="text-gray-500 text-center py-4">No appointments booked yet.</p>
-              ) : (
-                appointments.map((appointment, index) => (
-                  <div key={index} className="border rounded-lg p-4 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-medium">{appointment.fullName}</h3>
-                      <span className="text-sm text-gray-500">
-                        {appointment.date} at {appointment.time}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600">{appointment.symptoms}</p>
-                  </div>
-                ))
-              )}
-            </div>
+            <h2 className="text-xl font-semibold mb-4">Past Appointments</h2>
+            {appointments.length === 0 ? (
+              <p className="text-gray-500">No past appointments.</p>
+            ) : (
+              <ul className="space-y-2">
+                {appointments.map((appointment, index) => (
+                  <li key={index} className="p-4 border rounded-md shadow-sm">
+                    {appointment.fullName} - {appointment.doctor} on {appointment.date} at {appointment.time}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </main>
